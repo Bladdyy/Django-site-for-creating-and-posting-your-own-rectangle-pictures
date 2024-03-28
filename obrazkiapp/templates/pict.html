@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title> {{pict.name}} </title>
+</head>
+<body>
+    <a href="http://127.0.0.1:9000/obrazki/">Powrót do strony głównej</a>
+    <hr>
+    <h1>{{pict.name}}</h1>
+    <hr>
+    <svg width="{{pict.width}}" height="{{pict.height}}" viewBox="0 0 {{pict.width}} {{pict.height}}" xmlns="http://www.w3.org/2000/svg">
+        {%  for rect in rectangles %}
+            <rect x={{rect.x}} y={{rect.y}} width={{rect.width}} height={{rect.height}} fill={{rect.color}}></rect>
+        {% endfor %}
+    </svg>
+</body>
+</html>
+

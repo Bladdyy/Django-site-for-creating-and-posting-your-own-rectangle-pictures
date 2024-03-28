@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title> Obrazki </title>
+</head>
+<body>
+    <a href="http://127.0.0.1:9000/obrazki/logout">Logout</a>
+    <a href="http://127.0.0.1:9000/obrazki/panel">Panel do edycji</a>
+    <a href="http://127.0.0.1:9000/admin">Panel Admina</a>
+    <h1> Obrazki: </h1>
+    <ul>
+    {%  for pict in all_pics %}
+        <li><a href="http://127.0.0.1:9000/obrazki/{{ pict.name }}">{{ pict.name }}</a></li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
+
+
+
+
