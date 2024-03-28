@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title> {{pict.name}} </title>
+</head>
+<body>
+    <a href="http://127.0.0.1:9000/obrazki/">Powrót do strony głównej</a>
+    <br>
+    <a href="http://127.0.0.1:9000/obrazki/panel/"> Powrót do panelu</a>
+    <hr>
+    <h1>{{pict.name}}</h1>
+    <hr>
+    <svg width="{{pict.width}}" height="{{pict.height}}" viewBox="0 0 {{pict.width}} {{pict.height}}" xmlns="http://www.w3.org/2000/svg">
+        {%  for rect in rectangles %}
+            <rect x={{rect.x}} y={{rect.y}} width={{rect.width}} height={{rect.height}} fill={{rect.color}}></rect>
+        {% endfor %}
+    </svg>
+    <h2>Dane</h2>
+    <h3>Wielkość</h3>
+    <p>{{pict.width}}x{{pict.height}}</p>
+    <h3>Prostokąty:</h3>
+     <table>
+        <tr>
+            <th scope="col">X</th>
+            <th scope="col">Y</th>
+            <th scope="col">Szerokość</th>
+            <th scope="col">Wysokość</th>
+            <th scope="col">Kolor</th>
+            <th scope="col">Akcja</th>
+        </tr>
+        {%  for rect in rectangles %}
+        <tr>
+            <th scope="col">{{rect.x}}</th>
+            <th scope="col">{{rect.y}}</th>
+            <th scope="col">{{rect.width}}</th>
+            <th scope="col">{{rect.height}}</th>
+            <th scope="col">{{rect.color}}</th>
+            <th scope="col"><a href="{{pict.name}}/{{rect.id}}" name="">Usuń</a></th>
+        </tr>
+        {% endfor %}
+     </table>
+    <h3>Dodaj nowy prostokąt:</h3>
+
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>X:</label>
+            <input type="number" class="form-control" name="X" placeholder="Enter X coordinate">
+        </div>
+        <div class="form-group">
+            <label>Y: </label>
+            <input type="number" class="form-control" name="Y" placeholder="Enter Y coordinate">
+        </div>
+        <div class="form-group">
+            <label>Width: </label>
+            <input type="number" class="form-control" name="width" placeholder="Enter width">
+        </div>
+        <div class="form-group">
+            <label>Height: </label>
+            <input type="number" class="form-control" name="height" placeholder="Enter height">
+        </div>
+        <div class="form-group">
+            <label>Color: </label>
+            <input type="text" class="form-control" name="color" placeholder="Enter color">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</body>
+</html>
+
