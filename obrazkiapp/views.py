@@ -72,7 +72,6 @@ def logout_user(request):
 
 # Shows control panel of user.
 def show_panel(request):
-
     if request.user.is_authenticated:
         if request.method == 'POST':
             merged_tags = ""
@@ -110,6 +109,7 @@ def show_panel(request):
         paginator = Paginator(pics_list, 6)
         page_number = request.GET.get("page", 1)
         page_obj = paginator.get_page(page_number)
+        print("własna!")
         return render(request, 'Obrazkolandia_własna.html', {'all_pics': page_obj, 'order': order, 'all_tags': Tag.objects.get_queryset() , 'merged_tags': merged_tags})
     else:
         return redirect('login')
@@ -146,7 +146,6 @@ def pict_modify(request, pict_name):
             else:
                 return render(request, 'pict_modify.html', {'pict': pict})
         else:
-            print(pict_name)
             return render(request, '404.html')
     else:
         return redirect('login')
@@ -165,7 +164,6 @@ def rect_delete(request, pict_name, rect_id):
             rects = [rect.id for rect in Rectangle.objects.filter(picture=pict)]
             if rect_id in rects:
                 Rectangle.objects.filter(id=rect_id).delete()
-                print(rect_id)
                 return redirect('http://127.0.0.1:9000/obrazki/panel/' + pict_name)
             else:
                 return render(request, '404.html')
