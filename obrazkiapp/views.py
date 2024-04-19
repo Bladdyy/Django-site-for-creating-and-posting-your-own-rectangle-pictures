@@ -102,14 +102,12 @@ def show_panel(request):
             else:
                 tags = [tag.name for tag in Tag.objects.get_queryset()]
         pics_list = []
-        print(tags)
         for pic in Picture.objects.get_queryset().order_by(order):
             if request.user in pic.users.all() and any(tag.name in tags for tag in Tag.objects.filter(picture=pic)):
                 pics_list.append(pic)
         paginator = Paginator(pics_list, 6)
         page_number = request.GET.get("page", 1)
         page_obj = paginator.get_page(page_number)
-        print("własna!")
         return render(request, 'Obrazkolandia_własna.html', {'all_pics': page_obj, 'order': order, 'all_tags': Tag.objects.get_queryset() , 'merged_tags': merged_tags})
     else:
         return redirect('login')
