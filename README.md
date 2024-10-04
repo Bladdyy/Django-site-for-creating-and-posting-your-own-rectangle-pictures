@@ -55,3 +55,31 @@ Nawigacja po serwisie powinna być możliwa jedynie z użyciem linków dostępny
 Do logowania i wylogowywania artystów można użyć intefejsu zapewnionego przez panel administracyjny django. W takim wypadku powinni oni mieć ustawioną flage staff member, ale nie mogą mieć uprawnień do edycji niczego z użyciem admin panelu.
 
 Nie trzeba zabezpieczać się przed atakami w stylu: preparuję jakimś zewnętrznym narzędziem żądanie http, które wysłałby inny użytkownik celem modyfikacji jego obrazka. Wystarczy, że taka niechciana akcja nie będzie jawnie dostępna na stronie. Niemniej warto pomyśleć, w których miejscach strony może to stanowić potencjalne zagrożenie.
+
+# Second part
+### Zadanie
+W tym zadaniu należy przygotować przeglądarkę do obrazków (tzw. strona główna). Należy do tego użyć Django oraz Bootstrapa albo TailwindCSS (można użyć obu).
+
+### Zmiany w modelu
+* Model obrazka powinien zawierać dodatkowe pole opis (tekstowy, nieobowiązkowy).
+* Model obrazka powinien zawierać dodatkowe pole data_publikacji (data i czas publikacji obrazka, obowiązkowy).
+* Model obrazka powinien zawierać listę tagów (pole tags), które są przypisane do obrazka. Tagi mogą być zewnętrznym modelem, albo polem w modelu odbrazka.
+Dla tych zmian należy przygotować migrację.
+
+### Strona główna
+Na stronie głównej powinny się pojawiać:
+
+* Lista (paginowana, czyli np. 10 na stronę) wszystkich obrazków. Każdy obrazek powinien być wyświetlany jako miniaturka (np. 100x100 pikseli). Po kliknięciu na miniaturkę użytkownik powinien być przekierowany na stronę z pełnym obrazkiem.
+* Możliwość filtrowania obrazków po tagach.
+* Możliwość sortowania obrazków po dacie publikacji (rosnąco i malejąco).
+Paginację można zrobić korzystając z Paginator’a https://docs.djangoproject.com/en/5.0/topics/pagination/
+
+# Third part
+### Ogólnie
+W tym zadaniu należy przygotować serwis RESTowy w oparciu o fastAPI, zaprezentować automatyczną dokumentację tego serwisu oraz przetestować go za pomocą curla.
+
+### Zadania
+* Zaimplementuj end-point listujący wszystkie tagi wraz z liczbą obrazków przypisanych do danego tagu. End-point powinien być dostępny pod ścieżką /tags.
+* Zaimplementuj end-point listujący wszystkie obrazki wraz z ich tagami. End-point powinien być dostępny pod ścieżką /images.
+* Zaimplementuj end-point listujący wszystkie obrazki przypisane do danego tagu. End-point powinien być dostępny pod ścieżką /images/{tag}.
+* Zaimplementuj end-point kasujący obrazki. End-point powinien być dostępny pod ścieżką /images/del. Identyfikatory obrazków do skasowania powinny być przekazane w formie JSONa.
